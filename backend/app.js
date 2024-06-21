@@ -34,9 +34,7 @@ const upload = multer({ storage });
 app.use(cookieParser())
 app.use(fileUpload())
 
-app.get('/',(req,res)=>{
-   res.json("hello")
-})
+
 app.use("/api/v1",products)
 
 app.use("/api/v1",user)
