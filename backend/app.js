@@ -10,22 +10,22 @@ if(process.env.NODE_ENV!=="PRODUCTION"){
 
     require('dotenv').config({path:"backend/config/config.env"})
 }
-
+const cors=require('cors')
+// app.use(cors({
+//     origin:['https://deploye-mern-1']
+// }))
+// app.use(express.json({ limit: "50mb" })); 
 //route imports
 const products=require("./routes/productRoute")
 
 const user=require("./routes/userRoutes")
 
 const orders=require("./routes/orderRoute")
-const cors=require('cors')
 const payment=require("./routes/paymentRoute")
 const bodyParser=require('body-parser')
 const multer = require('multer')
 app.use(express.json())
-// app.use(cors({
-//     origin:['https://deploye-mern-1']
-// }))
-// app.use(express.json({ limit: "50mb" })); 
+
 app.use(bodyParser.json({ limit: '50mb' })); // Adjust the limit as necessary
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true })); // Adjust the limit as necessary
 
@@ -49,6 +49,9 @@ app.use(express.static(path.join(__dirname,"../frontend/build")))
 app.get("*",(req,res)=>{
     res.sendFile(path.resolve(__dirname,"../frontend/build/index.html"))
 })
+// app.get('/',(req,res)=>{
+//     res.json("Hello")
+// })
 //middleware for error
 app.use(errormidle)
 module.exports=app;
