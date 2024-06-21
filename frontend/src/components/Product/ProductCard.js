@@ -10,6 +10,7 @@ const ProductCard = ({ product }) => {
         size: 'small'
     };
 
+    // nrw
     return (
         <div className="w-60 h-80 bg-gray-50 p-3 flex flex-col gap-1  shadow-md">
             <Link to={`/products/product/${product._id}`} className="block h-48 overflow-hidden">
