@@ -82,7 +82,8 @@ let products=await ApiFeture.query
 let filteredProductsCount =products.length;
 
 //  products=await ApiFeture.query;
-console.log(products);
+// console.log(products);
+console.log("Read");
   res.status(200).json({
     success:true,
     products,
