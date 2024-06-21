@@ -22,9 +22,11 @@ const payment=require("./routes/paymentRoute")
 const bodyParser=require('body-parser')
 const multer = require('multer')
 app.use(express.json())
-// app.use(cors({
-//     origin:['https://deploye-mern-1']
-// }))
+app.use(cors({
+    origin:['https://ecommerce-web-97ip.vercel.app/'],
+    methods:{"GET","POST","PUT","DELETE"],
+             credentials:true
+}))
 // app.use(express.json({ limit: "50mb" })); 
 app.use(bodyParser.json({ limit: '50mb' })); // Adjust the limit as necessary
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true })); // Adjust the limit as necessary
