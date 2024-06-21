@@ -11,11 +11,11 @@ if(process.env.NODE_ENV!=="PRODUCTION"){
     require('dotenv').config({path:"backend/config/config.env"})
 }
 const cors=require('cors')
-app.use(cors({
-    origin:['https://ecommerce-web-97ip.vercel.app/'],
-    methods:{"GET","POST","PUT","DELETE"],
-             credentials:true
-}))
+// app.use(cors({
+//     origin:['https://ecommerce-web-97ip.vercel.app/'],
+//     methods:{"GET","POST","PUT","DELETE"],
+//              credentials:true
+// }))
 //route imports
 const products=require("./routes/productRoute")
 
@@ -38,21 +38,19 @@ app.use(cookieParser())
 app.use(fileUpload())
 
 
-// app.use("/api/v1",products)
+app.use("/api/v1",products)
 
-// app.use("/api/v1",user)
+app.use("/api/v1",user)
 
-// app.use("/api/v1",orders)
+app.use("/api/v1",orders)
 
-// app.use("/api/v1",payment)
+app.use("/api/v1",payment)
 
-// app.use(express.static(path.join(__dirname,"../frontend/build")))
-// app.get("*",(req,res)=>{
-//     res.sendFile(path.resolve(__dirname,"../frontend/build/index.html"))
-// })
-app.get('/',(req,res)=>{
-    res.json("Hello")
+app.use(express.static(path.join(__dirname,"../frontend/build")))
+app.get("*",(req,res)=>{
+    res.sendFile(path.resolve(__dirname,"../frontend/build/index.html"))
 })
+
 //middleware for error
 app.use(errormidle)
 module.exports=app;
