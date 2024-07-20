@@ -13,7 +13,7 @@ const ReviewCard = ({review}) => {
     <>
     <div className="reviewCard">
         <img src={profilePng} alt="User" />
-        <p>{review.name}</p>
+        <p className=' text-black'>{review.name}</p>
         <Rating {...options}/>
         <span className='reviewComment'>{review.comment}</span>
     </div>

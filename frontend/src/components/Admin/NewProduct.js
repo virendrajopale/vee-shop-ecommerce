@@ -27,9 +27,9 @@ const NewProduct = () => {
         description: "",
         price: 0,
         category: "",
-        images: [],
+       
     });
-
+    const [image,setImage]=useState();
     const [imagePreview, setImagesPreview] = useState(null);
     // const [avatarPreview, setAvatarPreview] = useState('https://i.stack.imgur.com/l60Hf.png')
     const [img, setImg] = useState(null)
@@ -66,29 +66,28 @@ const NewProduct = () => {
         formData.append("description", inputData.description);
         formData.append("category", inputData.category);
         formData.append("stock", inputData.stock);
-            formData.append("images", img);
+            formData.append("image", image);
 
-        // for (let image of inputData.images) {
-        // }
-         console.log(formData.getAll('images'));
+       
+        
          dispatch(createNewProduct(formData));
         
     };
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        if (e.target.name === 'img') {
+        // if (e.target.name === 'img') {
 
-            const reader = new FileReader();
-            reader.onload = () => {
-                if (reader.readyState === 2) {
-                    setImagesPreview(reader.result)
-                    setImg(reader.result)
-                }
+        //     const reader = new FileReader();
+        //     reader.onload = () => {
+        //         if (reader.readyState === 2) {
+        //             setImagesPreview(reader.result)
+        //             setImg(reader.result)
+        //         }
 
-            }
-            reader.readAsDataURL(e.target.files[0]);
-        }
+        //     }
+        //     reader.readAsDataURL(e.target.files[0]);
+        // }
         setInputData({ ...inputData, [name]: value });
     };
 
@@ -111,7 +110,33 @@ const NewProduct = () => {
             reader.readAsDataURL(file);
         }
     };
-
+    const handleUplaodImage=async(pic)=>{
+       
+        if(pic===undefined){
+         return
+        }
+        if(pic.type=="image/jpeg" || pic.type=="image/png" ){
+          const formdata=new FormData();
+          formdata.append("file",pic);
+          formdata.append("upload_preset","ECOMMERCE");
+          formdata.append("cloud_name","dbetaaewo")
+          axios.post("https://api.cloudinary.com/v1_1/dbetaaewo/image/upload", formdata)
+            .then((res) => {
+    
+            // console.log(data);
+            console.log(res.data.url);
+            setImage(res.data.url.toString())
+            setImagesPreview(res.data.url.toString());
+          })
+          .catch(err=>{
+            console.log(err);
+          })
+        }else{
+          
+          return
+        }
+        
+      }
     return (
         <>
             <MetaData title={"Create Products - Vee shop"} />
@@ -152,9 +177,13 @@ const NewProduct = () => {
                             <input type="number" placeholder="Stock" required
                                 name="stock" value={inputData.stock} onChange={handleInputChange} />
                         </div>
-                        <div id="createProductFormFile">
+                        {/* </form></div>div id="createProductFormFile">
                             <input type="file" name='img'  accept="image/*"
                                 onChange={handleInputChange}  />
+                        </> */}
+                        <div id="createProductFormFile">
+                            <input type="file" name='img'  accept="image/*"
+                                onChange={(e)=>handleUplaodImage(e.target.files[0])}  />
                         </div>
                         <div id="createProductFormImage">
                             {/* {imagePreview?.map((image, i) => ( */}

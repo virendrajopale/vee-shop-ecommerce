@@ -33,11 +33,13 @@ const productSchema=new mongoose.Schema({
     images:{
         public_id:{
             type:String,
-            required:true
+            required:true,
+            default:'https://i.pinimg.com/564x/50/54/84/50548408ef222b9f286dd4b80191cb45.jpg'
         },
         url:{
             type:String,
-            required:true 
+            required:true ,
+            default:'https://i.pinimg.com/564x/50/54/84/50548408ef222b9f286dd4b80191cb45.jpg'
         }
     },
     ratings:{

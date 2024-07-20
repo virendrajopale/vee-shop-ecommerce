@@ -3,6 +3,7 @@ import './nbar.css';
 import {FaBars,FaBeer,FaTimes} from 'react-icons/fa'
 import {Link} from 'react-router-dom'
 import Products from '../../Product/Products';
+import Search from '../../Product/Search';
 
 const Navbar = () => {
   const menubar=[
@@ -47,13 +48,14 @@ const Navbar = () => {
         menubar.map((links,menubarIndex)=>(
           <li className='px-4 cursor-pointer font-medium
           text-white hover:scale-105 duration-200 capitalize
-          bg-red-500 p-2 m-2 rounded-full ' key={menubarIndex}>
+          bg-white/10 backdrop-blur-lg p-2 m-2 rounded-full ' key={menubarIndex}>
             <Link to={links.url} className=' font-sign '> {links.link}</Link>
             </li>
         ))
+
       }
-       
         </ul>
+      
         <div onClick={()=>setNav(!nav)}
   
         className="pr-4 z-10 cursor-pointer md:hidden text-black">

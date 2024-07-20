@@ -17,7 +17,7 @@ const Dashboard = () => {
   const {user}=useSelector((state)=>state.user)
   const {users}=useSelector(state=>state.allUsers);
 
-  console.log(products);
+
 
   let outOfStock = 0;
   products &&

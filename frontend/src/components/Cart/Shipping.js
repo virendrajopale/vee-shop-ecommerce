@@ -81,10 +81,11 @@ const Shipping = () => {
                     <div>
                         <PublicIcon/>
                         <select name="" id=""
+                          className=' text-black'
                         required
                         value={country}
                         onChange={(e)=>setCountry(e.target.value)} >
-                            <option value="">County</option>
+                            <option value=""   className=' text-black'>County</option>
                             {
                                 Country&&
                                 Country.getAllCountries().map((item)=>
@@ -101,9 +102,10 @@ const Shipping = () => {
                                 <TransferWithinAStation/>
                                 <select name="" id=""
                                  required
+                                 className=' text-black'
                                 value={state}
                                 onChange={(e)=>setState(e.target.value)} >
-                                    <option value="">State</option>
+                                    <option   className=' text-black' value="">State</option>
                                     {
                                         State&&
                                         State.getStatesOfCountry(country).map((item)=>(
