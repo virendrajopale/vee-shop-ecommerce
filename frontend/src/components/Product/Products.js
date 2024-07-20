@@ -59,7 +59,7 @@ const Products = () => {
               valueLabelDisplay="auto"
               aria-labelledby="range-slider"
               min={0}
-              max={25000}
+              max={85000}
               className="mb-6"
             />
             <Typography className="text-lg font-semibold mb-4">Categories</Typography>
