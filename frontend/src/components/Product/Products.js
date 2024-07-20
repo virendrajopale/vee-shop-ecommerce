@@ -8,7 +8,7 @@ import Pagination from 'react-js-pagination';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import MetaData from '../layout/MetaData';
-
+import './Products.css'
 const categories = [
   "Laptop",
   "Food",
@@ -94,7 +94,7 @@ const Products = () => {
           
 
           </div>
-          {resultPerPage && (
+          { (
             <div className="flex justify-center my-8">
               <Pagination
                 activePage={currentPage}
@@ -107,8 +107,8 @@ const Products = () => {
                 lastPageText="»"
                 itemClass="page-item"
                 linkClass="page-link"
-                activeClass="bg-blue-600 text-white"
-                activeLinkClass="bg-blue-600 text-white"
+                activeClass=" text-red-500"
+                activeLinkClass=" text-red-500"
                 itemClassPrev="page-item"
                 itemClassNext="page-item"
                 linkClassPrev="page-link"
