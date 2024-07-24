@@ -44,7 +44,7 @@ import ReviewCard from './components/Product/ReviewCard';
 
 function App() {
   const {user,isAuthenticated}=useSelector(state=>state.user)
-
+console.log(user);
   const [stripeApiKey,setStripeKey]=useState("");
   function getStripeApiKey() {
     return new Promise((resolve, reject) => {
@@ -81,7 +81,7 @@ function App() {
   });
 
   },[])
- document.body.style.backgroundColor="rgb(12, 46, 54)"
+ document.body.style.backgroundColor="#31363F"
   return (
    <div className=' text-white font-sign'>
     <Router>

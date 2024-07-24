@@ -1,17 +1,16 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import Carousel from 'react-material-ui-carousel';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { clearError, getProductDetails, newProductReview } from '../../actions/productAction';
-import ReviewCard from './ReviewCard';
-import Loader from '../layout/Loader/Loader';
 import { useAlert } from 'react-alert';
-import MetaData from '../layout/MetaData';
-import './ProductDet.css';
-import { addToCart } from '../../actions/cartActions';
+import { FaMinus, FaPlus, FaShoppingCart, FaStar } from 'react-icons/fa';
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button } from '@material-ui/core';
 import { Rating } from '@mui/material';
+import { clearError, getProductDetails, newProductReview } from '../../actions/productAction';
+import { addToCart } from '../../actions/cartActions';
 import { ADD_REEVIEW_RESET } from '../../constants/productConstant';
+import ReviewCard from './ReviewCard';
+import Loader from '../layout/Loader/Loader';
+import MetaData from '../layout/MetaData';
 
 const ProductDetails = () => {
     const dispatch = useDispatch();
@@ -25,16 +24,12 @@ const ProductDetails = () => {
     const [comment, setComment] = useState("");
 
     const increaseQty = () => {
-        if (products.Stock <= qty) {
-            return;
-        }
+        if (products.Stock <= qty) return;
         setQty(qty + 1);
     };
 
     const decreaseQty = () => {
-        if (qty <= 1) {
-            return;
-        }
+        if (qty <= 1) return;
         setQty(qty - 1);
     };
 
@@ -49,7 +44,6 @@ const ProductDetails = () => {
         myForm.set('comment', comment);
         myForm.set('productId', id);
         dispatch(newProductReview(myForm));
-
         setOpen(false);
     };
 
@@ -76,113 +70,119 @@ const ProductDetails = () => {
         setOpen(!open);
     };
 
+    if (loading) return <Loader />;
+
     return (
-        <>{
-            loading ? <Loader /> :
-                <Fragment>
-                    <MetaData title={`${products?.name} - Vee Shop`} />
-
-                    <div className="bg-gray-100 min-h-screen">
-                        <div className="container mx-auto p-4 md:p-10">
-                            <div className="bg-white rounded-lg shadow-lg overflow-hidden md:flex">
-                                <div className="md:w-1/2">
-                                    <img 
-                                        src={products?.images?.url} 
-                                        alt={products?.name}
-                                        className="w-full h-full object-cover"
-                                    />
-                                </div>
-
-                                <div className="md:w-1/2 p-6 md:p-8">
-                                    <div className="space-y-6">
-                                        <div>
-                                            <h1 className="text-4xl font-bold text-gray-800">{products?.name}</h1>
-                                            <p className="text-gray-500 mt-2">Product # {products?._id}</p>
-                                        </div>
-
-                                        <div className="flex items-center space-x-2">
-                                            <Rating {...options} />
-                                            <span className="text-gray-600">({products?.numberOfReviews} Reviews)</span>
-                                        </div>
-
-                                        <div className="border-t border-b py-4">
-                                            <h2 className="text-3xl font-semibold text-gray-800">₹ {products?.price}</h2>
-                                            <div className="flex items-center space-x-4 mt-4">
-                                                <div className="flex items-center space-x-2 border rounded-md">
-                                                    <button onClick={decreaseQty} className="bg-gray-200 text-gray-700 px-3 py-2 rounded-l-md hover:bg-gray-300">-</button>
-                                                    <input readOnly value={qty} className="w-12 text-center border-x text-black" />
-                                                    <button onClick={increaseQty} className="bg-gray-200 text-gray-700 px-3 py-2 rounded-r-md hover:bg-gray-300">+</button>
-                                                </div>
-                                                <button 
-                                                    onClick={addToCartHandler} 
-                                                    disabled={products?.Stock < 1} 
-                                                    className={`px-6 py-2 rounded-md text-white font-semibold transition-colors duration-300 ${
-                                                        products?.Stock < 1 
-                                                        ? 'bg-gray-400 cursor-not-allowed' 
-                                                        : 'bg-blue-600 hover:bg-blue-700'
-                                                    }`}
-                                                >
-                                                    Add to Cart
-                                                </button>
-                                            </div>
-                                            <p className="mt-4 text-lg">
-                                                Status: 
-                                                <span className={`font-bold ml-2 ${products?.Stock < 1 ? "text-red-600" : "text-green-600"}`}>
-                                                    {products?.Stock < 1 ? "Out of Stock" : "In Stock"}
-                                                </span>
-                                            </p>
-                                        </div>
-
-                                        <div>
-                                            <h3 className="text-xl font-semibold text-gray-800">Description</h3>
-                                            <p className="text-gray-600 mt-2">{products?.description}</p>
-                                        </div>
-
-                                        <button 
-                                            onClick={submitReviewToggle} 
-                                            className="w-full bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600 transition-colors duration-300"
-                                        >
-                                            Submit Review
+        <Fragment>
+            <MetaData title={`${products?.name} - Vee Shop`} />
+            <div className=" min-h-screen py-12">
+                <div className="container mx-auto px-4">
+                    <div className=" rounded-lg shadow-lg overflow-hidden md:grid grid-cols-2 justify-center items-center">
+                        <div className="m h-80  flex justify-center items-center">
+                            <img 
+                                src={products?.images?.url} 
+                                alt={products?.name}
+                                className="w-full h-full object-contain"
+                            />
+                        </div>
+                        <div className=' bg-white px-4 cursor-pointer font-medium t  border-2 capitalize
+             text-black p-2 m-2 shadow-[0.2em_0.2em] border-yellow-500  duration-300'>
+                            <h1 className="text-3xl font-bold text-gray-800 mb-2">{products?.name}</h1>
+                            <p className="text-gray-500 mb-4">Product # {products?._id}</p>
+                            <div className="flex items-center mb-4">
+                                <Rating {...options} 
+                                    icon={<FaStar className="text-yellow-400" />}
+                                    emptyIcon={<FaStar className="text-gray-300" />}
+                                    className="mr-2"
+                                />
+                                <span className="text-gray-600">({products?.numberOfReviews} Reviews)</span>
+                            </div>
+                            <div className="border-t border-b py-4 mb-6">
+                                <h2 className="text-3xl font-semibold text-gray-800 mb-4">₹ {products?.price}</h2>
+                                <div className="flex items-center space-x-4">
+                                    <div className="flex items-center border-2 border-yellow-500">
+                                        <button onClick={decreaseQty} className="p-2  ">
+                                            <FaMinus className="text-gray-600" />
+                                        </button>
+                                        <input readOnly value={qty} className="w-12 text-center border-x-2 border-yellow-500 p-2 text-black" />
+                                        <button onClick={increaseQty} className="p-2   ">
+                                            <FaPlus className="text-gray-600" />
                                         </button>
                                     </div>
+                                    <button 
+                                        onClick={addToCartHandler} 
+                                        disabled={products?.Stock < 1} 
+                                        className={`flex items-center px-6 py-2    bg-white  cursor-pointer font-medium   border-2 capitalize
+             text-black p-2 m-2 shadow-[0.2em_0.2em] border-yellow-500 r hover:shadow-[0.15em_0.15em_yellow] hover:-translate-x-1 hover:-translate-y-1 duration-300 ${
+                                            products?.Stock < 1 
+                                            ? 'bg-gray-400 cursor-not-allowed' 
+                                            : 'bg-blue-600 '
+                                        }`}
+                                    >
+                                        <FaShoppingCart className="mr-2" />
+                                        Add to Cart
+                                    </button>
                                 </div>
+                                <p className="mt-4 text-lg">
+                                    Status: 
+                                    <span className={`font-bold ml-2 ${products?.Stock < 1 ? "text-red-600" : "text-green-600"}`}>
+                                        {products?.Stock < 1 ? "Out of Stock" : "In Stock"}
+                                    </span>
+                                </p>
                             </div>
-
-                            <div className="mt-10 bg-white rounded-lg shadow-lg p-6">
-                                <h3 className="text-2xl font-semibold text-gray-800 mb-6">REVIEWS</h3>
-                                <Dialog aria-labelledby='simple-dialog-title' open={open} onClose={submitReviewToggle}>
-                                    <DialogTitle>Submit Review</DialogTitle>
-                                    <DialogContent className='submitDialog'>
-                                        <Rating onChange={(e) => setRating(e.target.value)} value={rating} size='large' />
-                                        <textarea
-                                            className='submitDialogTextArea w-full mt-4 p-2 border rounded-md'
-                                            cols={'30'}
-                                            value={comment}
-                                            onChange={(e) => setComment(e.target.value)}
-                                            rows={'5'}
-                                            placeholder="Write your review here..."
-                                        ></textarea>
-                                    </DialogContent>
-                                    <DialogActions>
-                                        <Button onClick={submitReviewToggle} color='secondary'>Cancel</Button>
-                                        <Button onClick={reviewSubmitHandler} color='primary'>Submit</Button>
-                                    </DialogActions>
-                                </Dialog>
-                                {products?.reviews && products?.reviews[0] ? (
-                                    <div className="reviews mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                        {products?.reviews && products?.reviews.map((review) => (
-                                            <ReviewCard key={review._id} review={review} />
-                                        ))}
-                                    </div>
-                                ) : (
-                                    <p className='text-center text-xl text-gray-600 mt-6'>No Reviews Yet</p>
-                                )}
+                            <div className="mb-6">
+                                <h3 className="text-xl font-semibold text-gray-800 mb-2">Description</h3>
+                                <p className="text-gray-600">{products?.description}</p>
                             </div>
+                          
                         </div>
                     </div>
-                </Fragment>
-        }
-        </>
+                    <div className="mt-12  rounded-lg shadow-lg p-6">
+                        <h3 className="text-2xl text-center font-semibold  mb-6">REVIEWS</h3>
+                        <Dialog aria-labelledby='simple-dialog-title' open={open} onClose={submitReviewToggle}>
+                            <DialogTitle>Submit Review</DialogTitle>
+                            <DialogContent className='submitDialog'>
+                                <Rating 
+                                    onChange={(e) => setRating(e.target.value)} 
+                                    value={rating} 
+                                    size='large'
+                                    icon={<FaStar className="text-yellow-400" />}
+                                    emptyIcon={<FaStar className="text-gray-300" />}
+                                />
+                                <textarea
+                                    className='w-full mt-4 p-2 border rounded-md'
+                                    cols={'30'}
+                                    value={comment}
+                                    onChange={(e) => setComment(e.target.value)}
+                                    rows={'5'}
+                                    placeholder="Write your review here..."
+                                ></textarea>
+                            </DialogContent>
+                            <DialogActions>
+                                <Button onClick={submitReviewToggle} color='secondary'>Cancel</Button>
+                                <Button onClick={reviewSubmitHandler} color='primary'>Submit</Button>
+                            </DialogActions>
+                        </Dialog>
+                        {products?.reviews && products?.reviews[0] ? (
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                {products?.reviews.map((review) => (
+                                    <ReviewCard key={review._id} review={review} />
+                                ))}
+                            </div>
+                        ) : (
+                            <p className='text-center text-xl text-gray-600 mt-6'>No Reviews Yet</p>
+                        )}
+                        <button 
+                                onClick={submitReviewToggle} 
+                               className=' bg-white px-4 w-full cursor-pointer font-medium t  border-2 capitalize
+             text-black p-2 m-2 shadow-[0.2em_0.2em] border-yellow-500 r hover:shadow-[0.15em_0.15em_yellow] hover:-translate-x-1 hover:-translate-y-1 duration-300'
+                            >
+                                Submit Review
+                            </button>
+                    </div>
+                </div>
+            </div>
+        </Fragment>
     );
 }
 

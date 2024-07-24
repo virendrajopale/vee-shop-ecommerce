@@ -1,18 +1,18 @@
 .myOrderPage{
     width: 100vw;
-    height: 100vh;
+    height: 80vh;
     max-width: 100%;
     padding: 0 7vmax;
     box-sizing: border-box;
-    background-color: white;
-    position: fixed;
+   
+   
     display: flex;
     flex-direction: column;
     left: 0;
     top: 0;
 }
 .myOrderTable{
-    background-color: white;
+ 
 }
 .myOrderTable div{
     font-size: 1vmax;

@@ -59,7 +59,7 @@ padding: 5vmax;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 50vh;
+    height: 70vh;
     padding: 10vmax;
 }
 .emptyCart>svg{
@@ -71,24 +71,7 @@ padding: 5vmax;
     font-size: 2vmax;
 
 }
-.emptyCart>a{
-    border: none;
-    /* width: 50%; */
-    cursor: pointer;
-    color: white;
-    transition: all 0.5s;
-    background-color: rgb(75, 75, 75);
 
-    border-radius: 20px;
-    font-size: 1.5vmax;
-    padding: .8vmax 4vmax;
-    margin: 1vmax 4vmax;
-    outline: none;
-    text-decoration: none;
-}
-.emptyCart>a:hover{
-    background-color: green;
-}
 .cartContainer{
     width: 90%;
     margin: auto;
@@ -153,7 +136,7 @@ padding: 5vmax;
     color: white;
     transition: all 0.5s;
     background-color: tomato;
-    font-family:'Courier New', Courier, monospace;
+
     border-radius: 20px;
     font-size: 1vmax;
     padding: .8vmax 4vmax;

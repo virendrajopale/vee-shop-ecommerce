@@ -33,12 +33,12 @@ const ConfirmOrder = () => {
 
   return (
     <>
-      <MetaData title="Confirm Order - Vee shop" />
+      <MetaData title="Confirm Order - Vee Shop" />
       <CheckOutStep activeStep={1} />
-      <div className="min-h-screen bg-white text-black grid grid-cols-2 lg:grid-cols-3">
-        <div className="col-span-2 p-4">
-          <Typography variant="h5" className="mb-4">Shipping Info</Typography>
-          <div className="border p-4 mb-6">
+      <div className="min-h-screen  text-black grid grid-cols-1 lg:grid-cols-2 gap-4 p-4">
+        <div className="bg-white p-4  shadow-md">
+          <Typography variant="h5" className="mb-4 text-gray-800 text-center">Shipping Info</Typography>
+          <div className="border p-4 border-yellow-400 mb-6">
             <div className="mb-4 flex">
               <p className="font-semibold">Name:</p>
               <span className="ml-2">{user.name}</span>
@@ -52,43 +52,43 @@ const ConfirmOrder = () => {
               <span className="ml-2">{address}</span>
             </div>
           </div>
-          <Typography variant="h5" className="mb-4">Your Cart Items</Typography>
-          <div className="border p-4 overflow-y-auto max-h-96">
+          <Typography variant="h5" className="mb-4 text-gray-800 text-center">Your Cart </Typography>
+          <div className="border p-4 border-yellow-400 overflow-y-auto max-h-96">
             {cartItems && cartItems.map((item) => (
               <div key={item.product} className="flex justify-between items-center mb-4">
-                <img src={item.image} alt="" className="w-16 h-16 object-cover" />
+                <img src={item.image} alt="" className="w-16 h-16 object-contain rounded-lg" />
                 <Link to={`/product/${item.product}`} className="ml-4 flex-1 text-blue-600">
                   {item.name}
                 </Link>
-                <span className="ml-4">
+                <span className="ml-4 text-gray-700">
                   {item.quantity} x {item.price} = <b>₹{item.price * item.quantity}</b>
                 </span>
               </div>
             ))}
           </div>
         </div>
-        <div className="p-4 border-l lg:border-l-0 lg:border-t">
-          <Typography variant="h5" className="mb-4 text-center">Order Summary</Typography>
-          <div className="border p-4">
+        <div className="bg-white p-4  shadow-md">
+          <Typography variant="h5" className="mb-4 text-gray-800 text-center">Order Summary</Typography>
+          <div className="border border-yellow-400 p-4 ">
             <div className="flex justify-between mb-4">
-              <p>Subtotal:</p>
-              <span>₹ {subtotal}</span>
+              <p className="text-gray-600">Subtotal:</p>
+              <span className="text-gray-700">₹ {subtotal}</span>
             </div>
             <div className="flex justify-between mb-4">
-              <p>Shipping Charges:</p>
-              <span>₹ {shippingCharges}</span>
+              <p className="text-gray-600">Shipping Charges:</p>
+              <span className="text-gray-700">₹ {shippingCharges}</span>
             </div>
             <div className="flex justify-between mb-4">
-              <p>GST:</p>
-              <span>₹ {gst}</span>
+              <p className="text-gray-600">GST:</p>
+              <span className="text-gray-700">₹ {gst}</span>
             </div>
             <div className="flex justify-between border-t pt-4">
-              <p className="font-semibold">Total:</p>
-              <span className="font-semibold">₹ {totalPrice}</span>
+              <p className="font-semibold text-gray-800">Total:</p>
+              <span className="font-semibold text-gray-800">₹ {totalPrice}</span>
             </div>
             <button
               onClick={proceedToPay}
-              className="w-full mt-4 bg-red-600 text-white py-2 rounded transition duration-300 hover:bg-green-600"
+              className="w-full py-2 mt-4 bg-green-500 text-white  hover:shadow-[0.15em_0.15em_green] hover:-translate-x-1 hover:-translate-y-1 duration-300"
             >
               Proceed To Payment
             </button>

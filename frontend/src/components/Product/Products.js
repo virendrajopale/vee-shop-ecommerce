@@ -26,14 +26,18 @@ const Products = () => {
   const { keyword } = useParams();
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [price, setPrice] = useState([0, 25000]);
+  const [price, setPrice] = useState([0, 85000]);
   const [category, setCategory] = useState("");
   const [ratings, setRating] = useState(0);
 
   const priceHandler = (e, newPrice) => {
     setPrice(newPrice);
   };
-
+  const clearFilters = () => {
+    setPrice([0, 85000]);
+    setCategory("");
+    setRating(0);
+  };
   const setCurrentPageNo = (e) => {
     setCurrentPage(e);
   };
@@ -49,9 +53,11 @@ const Products = () => {
       ) : (
         <>
           <MetaData title={"PRODUCTS Vee shop"} />
-          <h2 className="text-center text-4xl font-semibold my-8">Products</h2>
-          <div className='flex'>
-          <div className=" top-20 left-8 bg-black/20 backdrop-blur-sm p-4 h-[30rem] text-white rounded-lg shadow-lg">
+          
+          <div className='flex '>
+          <div className="lg:sticky top-20 left-0  bg-white p-4 shadow-[0.2em_0.2em] border-yellow-500 h-[100vh] w-60 text-black flex flex-col justify-between">
+           <span>
+
             <Typography className="text-lg font-semibold mb-4">Price</Typography>
             <Slider
               value={price}
@@ -59,18 +65,19 @@ const Products = () => {
               valueLabelDisplay="auto"
               aria-labelledby="range-slider"
               min={0}
+              color='yellow'
               max={85000}
-              className="mb-6"
+              className="mb-6 text-yellow-300"
             />
-            <Typography className="text-lg font-semibold mb-4">Categories</Typography>
+           </span>
             <ul className="mb-6">
-              {categories.map((category) => (
+              {categories.map((cat) => (
                 <li
-                  className="cursor-pointer mb-2 text-blue-600 hover:underline"
-                  key={category}
-                  onClick={() => setCategory(category)}
+                    className={`cursor-pointer mb-2  ${category === cat ? 'text-yellow-600 scale-105' : 'texwhitet- hover:text-blue-600'}`}
+                    key={cat}
+                  onClick={() => setCategory(cat)}
                 >
-                  {category}
+                  {cat}
                 </li>
               ))}
             </ul>
@@ -83,18 +90,21 @@ const Products = () => {
               max={5}
               valueLabelDisplay="auto"
             />
+             <button
+                onClick={clearFilters}
+                className=' bg-white px-4 cursor-pointer font-medium   border-2 capitalize
+                text-black p-2 m-2 shadow-[0.2em_0.2em] border-yellow-500  hover:shadow-[0.15em_0.15em_yellow] hover:-translate-x-1 hover:-translate-y-1 duration-300'              >
+                Clear Filters
+              </button>
           </div>
+              <div className='flex flex-col  justify-center w-full h-fit'>
 
           <div className="flex flex-wrap justify-center gap-6 p-4 ml-8">
             {products && products.map((product) => (
               <ProductCard key={product._id} product={product} />
             ))}
           </div>
-         
-          
-
-          </div>
-          { (
+        {
             <div className="flex justify-center my-8">
               <Pagination
                 activePage={currentPage}
@@ -115,7 +125,12 @@ const Products = () => {
                 linkClassNext="page-link"
               />
             </div>
-          )}
+        }
+          
+              </div>
+
+          </div>
+          
         </>
       )}
     </>

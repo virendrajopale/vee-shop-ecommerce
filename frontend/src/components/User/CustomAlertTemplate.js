@@ -6,7 +6,7 @@ const CustomAlertTemplate = ({ style, options, message, close }) => {
   const alert = useAlert();
 
   return (
-    <div style={{ ...style, color: 'white' }}>
+    <div style={{ ...style, color: 'white',backgroundColor:'red' }}>
       {message}
       <button onClick={() => close()}>Close</button>
     </div>

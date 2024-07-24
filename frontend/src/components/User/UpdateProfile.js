@@ -14,7 +14,7 @@ const UpdateProfile = () => {
     const alert=useAlert()
     const {error,isUpdated,user,loading}=useSelector(state=>state.profile)
    
-    const [avatarPreview, setAvatarPreview] = useState('/Profile.png')
+    const [avatarPreview, setAvatarPreview] = useState('https://media.istockphoto.com/id/1495088043/vector/user-profile-icon-avatar-or-person-icon-profile-picture-portrait-symbol-default-portrait.jpg?s=612x612&w=0&k=20&c=dhV2p1JwmloBTOaGAtaA3AW1KSnjsdMt7-U_3EZElZ0=')
     const [avatar, setAvatar] = useState("");
     const [name,setName]=useState("")
     const [email,setEmail]=useState("")
